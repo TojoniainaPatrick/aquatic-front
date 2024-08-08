@@ -1,0 +1,123 @@
+.nav-bar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 10px 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    background-color: white;
+    box-shadow: 0 0 10px 5px rgba(150, 150, 150, .3);
+}
+
+.nav-bar-avatar{
+    position: relative;
+}
+
+.notification-badge{
+    position: absolute;
+    background-color: rgb(250, 33, 116);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: .9rem;
+    top: -5px;
+    right: 45%;
+}
+
+/* smartphone */
+@media screen and (max-width: 767px) {
+    .nav-ul, .nav-item{
+        display: none;
+    }
+}
+
+/* tablet */
+@media screen and (min-width: 767px) and (max-width: 1024px) {
+    .nav-ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-item{
+        display: inline-block;
+    }
+    
+    .nav-item a{
+        display: inline-block;
+        text-decoration: none;
+        padding: 10px 25px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin: 0 5px;
+        transition: all ease-in-out .2s;
+        color: var(--gray);
+    }
+    
+    .nav-item a:hover{
+        background-color: var(--secondary);
+        color: white;
+        border-radius: 5px;
+    }
+    
+    .nav-item a.active{
+        background-color: var(--primary);
+        color: white;
+        border-radius: 5px;
+    }
+}
+
+/* desktop */
+@media screen and (min-width: 1024px) {
+    .nav-ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-item{
+        display: inline-block;
+    }
+    
+    .nav-item a{
+        display: inline-block;
+        text-decoration: none;
+        padding: 10px 25px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin: 0 5px;
+        transition: all ease-in-out .2s;
+        color: var(--gray);
+    }
+    
+    .nav-item a.active{
+        background-color: var(--primary);
+        color: white;
+        border-radius: 5px;
+    }
+    
+    .nav-item a:hover{
+        background-color: var(--secondary);
+        color: white;
+        border-radius: 5px;
+    }
+}

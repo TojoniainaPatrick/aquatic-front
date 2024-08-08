@@ -1,0 +1,11 @@
+@media screen and (max-width: 767px) {
+    .default-time-limite{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .mobile-time-limite{
+        display: none;
+    }
+}

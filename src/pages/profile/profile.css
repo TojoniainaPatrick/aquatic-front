@@ -1,0 +1,46 @@
+.photo-container{
+    display: flex;
+    width: 150px;
+    flex-direction: column;
+}
+
+.photo{
+    background-color: lightblue;
+    text-align: center;
+}
+
+.photo img{
+    height: 100%;
+    object-fit: cover;
+}
+
+.custom-file-input {
+  color: transparent;
+  width: 100%;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before{
+  content: 'Modifer photo';
+  color: #fff;
+  display: inline-block;
+  background-color: #198754 !important;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  padding: 8px 0;
+}
+.custom-file-input:hover::before {
+  border-color: #198754;
+}
+  .custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+}

@@ -1,0 +1,7 @@
+@import './style/color/color.css';
+@import './App.css';
+@import './components/navbar/navbar.css';
+@import './components/toggleMenu/togglemenu.css';
+@import './pages/authentication/loginpage.css';
+@import './pages/tasks/newtask.css';
+@import './pages/profile/profile.css';

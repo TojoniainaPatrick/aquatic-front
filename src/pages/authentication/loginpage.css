@@ -1,0 +1,52 @@
+.authentication-page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2F2F2;
+    overflow: hidden;
+}
+
+.authentication-container .logo-container{
+    margin: 10px auto;
+}
+
+.authentication-container{
+    border-radius: 10px 0 10px 0;
+    padding: 30px 25px;
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 5px 5px 5px 2px rgba(200, 200, 200, .15);
+    background-color: white;
+}
+
+.btn-container{
+    width: 100%;
+    margin: 15px auto;
+}
+
+.link-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid lightgray;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.link-container a{
+    font-style: italic;
+    color: grey;
+    font-weight: 400;
+    font-size: .89rem;
+    transition: all ease-in-out .2s;
+}
+
+.link-container a:hover{
+    color: rgb(94, 94, 94);
+}
