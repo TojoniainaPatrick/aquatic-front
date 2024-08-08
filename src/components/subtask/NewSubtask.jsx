@@ -9,7 +9,7 @@ import useCustomContext from '../../context/useCustomContext'
 
 const NewSubtask = () => {
 
-    const [open, setOpen] = useState(false);
+    const [ open, setOpen ] = useState(false);
     const [ subtask, setSubtask ] = useState({})
 
     const {
@@ -21,7 +21,6 @@ const NewSubtask = () => {
     const showModal = () => {
         setOpen(true);
     };
-
 
     const handleSubmit = async _=> {
 
@@ -86,6 +85,8 @@ const NewSubtask = () => {
                         <Form.Item label="Début">
                         <DatePicker
                             inputReadOnly = { true }
+                            minDate = { currentTask.task_start_date ? dayjs(currentTask.task_start_date) : null }
+                            maxDate = { currentTask.task_end_date ? dayjs(currentTask.task_end_date) : null }
                             onChange = { value => setSubtask({ ...subtask, subtask_start_date: dayjs(value).format('YYYY-MM-DD')}) }
                         />
                         </Form.Item>
@@ -93,6 +94,8 @@ const NewSubtask = () => {
                         <Form.Item label="Fin">
                         <DatePicker
                             inputReadOnly = { true }
+                            minDate = { currentTask.task_start_date ? dayjs(currentTask.task_start_date) : null }
+                            maxDate = { currentTask.task_end_date ? dayjs(currentTask.task_end_date) : null }
                             onChange = { value => setSubtask({ ...subtask, subtask_end_date: dayjs(value).format('YYYY-MM-DD')}) }
                         />
                         </Form.Item>
@@ -101,23 +104,25 @@ const NewSubtask = () => {
 
                     <Form.Item label="Délais" className = 'default-time-limite'>
                         <RangePicker
-                        allowEmpty = { true }
-                        inputReadOnly = { true }
-                        value = {[
-                            subtask.subtask_start_date ? dayjs(subtask.subtask_start_date) : null,
-                            subtask.subtask_end_date ? dayjs(subtask.subtask_end_date) : null
-                        ]}
-                        popupClassName = 'date-picker-popup'
-                        onChange = { value => {
-                            if(value && value.length > 0 ){
-                                const [ start, end ] = value
-                                setSubtask({
-                                    ...subtask,
-                                    subtask_start_date: start ? dayjs(start).format('YYYY-MM-DD') : null,
-                                    subtask_end_date: end ? dayjs(end).format('YYYY-MM-DD') : null,
-                                })
-                            }
-                        }}
+                            allowEmpty = { true }
+                            inputReadOnly = { true }
+                            minDate = { currentTask.task_start_date ? dayjs(currentTask.task_start_date) : null }
+                            maxDate = { currentTask.task_end_date ? dayjs(currentTask.task_end_date) : null }
+                            value = {[
+                                subtask.subtask_start_date ? dayjs(subtask.subtask_start_date) : null,
+                                subtask.subtask_end_date ? dayjs(subtask.subtask_end_date) : null
+                            ]}
+                            popupClassName = 'date-picker-popup'
+                            onChange = { value => {
+                                if(value && value.length > 0 ){
+                                    const [ start, end ] = value
+                                    setSubtask({
+                                        ...subtask,
+                                        subtask_start_date: start ? dayjs(start).format('YYYY-MM-DD') : null,
+                                        subtask_end_date: end ? dayjs(end).format('YYYY-MM-DD') : null,
+                                    })
+                                }
+                            }}
                         />
                     </Form.Item>
                 </Form>

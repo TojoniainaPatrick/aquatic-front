@@ -89,6 +89,8 @@ const EditSubTask = ({open, setOpen}) => {
                         <Form.Item label="Début">
                         <DatePicker
                             inputReadOnly = { true }
+                            minDate = { currentTask.task_start_date ? dayjs(currentTask.task_start_date) : null }
+                            maxDate = { currentTask.task_end_date ? dayjs(currentTask.task_end_date) : null }
                             value = { currentSubtask.subtask_start_date ? dayjs(currentSubtask.subtask_start_date) : null }
                             onChange = { value => setCurrentSubtask({ ...currentSubtask, subtask_start_date: dayjs(value).format('YYYY-MM-DD')}) }
                         />
@@ -97,6 +99,8 @@ const EditSubTask = ({open, setOpen}) => {
                         <Form.Item label="Fin">
                         <DatePicker
                             inputReadOnly = { true }
+                            minDate = { currentTask.task_start_date ? dayjs(currentTask.task_start_date) : null }
+                            maxDate = { currentTask.task_end_date ? dayjs(currentTask.task_end_date) : null }
                             value = { currentSubtask.subtask_end_date ? dayjs(currentSubtask.subtask_start_date) : null }
                             onChange = { value => setCurrentSubtask({ ...currentSubtask, subtask_end_date: dayjs(value).format('YYYY-MM-DD')}) }
                         />
@@ -108,6 +112,8 @@ const EditSubTask = ({open, setOpen}) => {
                         <RangePicker
                             allowEmpty = { true }
                             inputReadOnly = { true }
+                            minDate = { currentTask.task_start_date ? dayjs(currentTask.task_start_date) : null }
+                            maxDate = { currentTask.task_end_date ? dayjs(currentTask.task_end_date) : null }
                             value = {[
                                 currentSubtask.subtask_start_date ? dayjs(currentSubtask.subtask_start_date) : null,
                                 currentSubtask.subtask_end_date ? dayjs(currentSubtask.subtask_end_date) : null

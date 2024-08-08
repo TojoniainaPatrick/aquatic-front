@@ -1,13 +1,12 @@
-import aqslogo from '../../assets/images/aqslogo.jpeg'
+import pageNotFound from '../../assets/images/404.png'
+import { Flex } from 'antd'
 
 export default function PageNotFound(){
     return(
-        <div className="page-not-found" style = {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-            <img src = { aqslogo } alt="" width = { 150 } height = { 80 }/>
-            <br />
-            <br />
-            <h1>Erreur 404</h1>
-            <p>Ressource non trouvée!</p>
-        </div>
+        <Flex vertical = { true }  align = "center" justify = "center" style={{ width: '100vw', height: 'calc(100vh - 150px)' }}>
+            <img src = { pageNotFound } alt = "Erreur 401" width = { 400 } height = { 400 } />
+            <p style={{ color: '#f73b73', fontWeight: 'bold', fontSize: '2rem' }}> Page non trouvée!</p>
+            <p style={{ fontSize: '1.35rem'}}>La page que vous avez demandée n'existe pas!</p>
+        </Flex>
     )
 }

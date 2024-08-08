@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Outlet, Route, Routes } from 'react-router-dom'
 import NavBar from './components/navbar/NavBar'
 import Task from './pages/tasks/Task'
 import Dashboard from './pages/dashboard/Dashboard'
@@ -18,7 +18,8 @@ function App() {
       <NavBar />
       <div className="page-content">
 
-        <Routes>
+        <Outlet />
+        {/* <Routes>
 
           <Route  element = { <RequireAuth allowedRoles = {['approving', 'director']} />} >
 
@@ -40,7 +41,7 @@ function App() {
             <Route path = '/user' element = { <User /> } />
           </Route>
 
-        </Routes>
+        </Routes> */}
       </div>
     </>
   )

@@ -60,7 +60,7 @@ export const CustomContextProvider = ({ children }) => {
 
     // current user notification
     const currentUserNotifications = user.user_role == 'approving'
-    ? notifications.filter( notification => notification.notification_receiver == null || notification.notification_receiver == user.user_id )
+    ? notifications.filter( notification => notification.notification_receiver == null || notification.notification_receiver == user.user_id ).filter( notification => notification.notification_object_reference != user.user_id )
     : notifications.filter( notification => notification.notification_receiver == user.user_id )
 
     // new notification

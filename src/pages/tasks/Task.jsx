@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react'
 import useCustomContext from '../../context/useCustomContext'
-import CustomTable from '../../components/datadisplay/CustomTable'
-import { Button, Progress, message, Input, Flex, DatePicker, Select, Avatar } from 'antd'
-import PopupMenu from '../../components/popup_menu/PopupMenu'
+import { Button, Input, Flex, DatePicker, Select } from 'antd'
 import { Link } from 'react-router-dom'
-import { CheckCircleFilled, DeleteOutlined, DropboxSquareFilled, EditTwoTone, InfoCircleFilled, PlusSquareOutlined } from '@ant-design/icons'
-import PopupConfirm from '../../components/popup_confirm/PopupConfirm'
-import axios from '../../api/axios'
+import { PlusSquareOutlined } from '@ant-design/icons'
 const { Search } = Input
-import { columns, paginationOptions } from '../../services/tasks/taskConstant'
-import { handleApprove } from '../../services/tasks/taskServices'
+import { paginationOptions } from '../../services/tasks/taskConstant'
 import TaskTable from './TaskTable'
+import dayjs from 'dayjs'
 
 
 const date_filter = [
@@ -29,6 +25,10 @@ const date_filter = [
   {
       value: 'finish',
       label: 'Accomplie'
+  },
+  {
+      value: '',
+      label: ''
   },
 ]
 
@@ -52,6 +52,15 @@ export default function Task(){
 
     // handle search
     const onSearch = (value, _e, info) => setSearch(value)
+    
+    // handle date search
+    const filteredTasks = data => {
+      if( dateColumn == 'creation' ) return data.filter( task => dayjs(task.task_created_at).format('YYYY-MM-DD').includes(dateFilter))
+      else if( dateColumn == 'start' ) return data.filter( task => dayjs(task.task_start_date).format('YYYY-MM-DD').includes(dateFilter))
+      else if( dateColumn == 'end' ) return data.filter( task => dayjs(task.task_end_date).format('YYYY-MM-DD').includes(dateFilter))
+      else if( dateColumn == 'finish' ) data.filter( task => dayjs(task.task_finished_at).format('YYYY-MM-DD').includes(dateFilter))
+      else return data
+    }
 
     return(
         <>
@@ -68,7 +77,13 @@ export default function Task(){
                 }}
               />
 
-              <DatePicker  disabled = { dateColumn.toString().trim() == '' } style = {{ margin: '2px 5px' }}/>
+              <DatePicker 
+                disabled = { dateColumn.toString().trim() == '' }
+                style = {{ margin: '2px 5px' }}
+                onChange = { e => {
+                  e == null ? setDateFilter('') : setDateFilter(dayjs(e).format('YYYY-MM-DD'))
+                }}
+              />
 
               <Select
                 showSearch
@@ -97,7 +112,7 @@ export default function Task(){
                 
             </Flex>
 
-            <TaskTable search = { search } pagination = { pagination } />
+            <TaskTable search = { search } pagination = { pagination } filteredTasks = { filteredTasks( tasks ) } />
         </>
     )
 }

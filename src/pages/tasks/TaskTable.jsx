@@ -8,7 +8,7 @@ import CustomTable from "../../components/datadisplay/CustomTable";
 import { columns } from "../../services/tasks/taskConstant";
 import PopupMenu from "../../components/popup_menu/PopupMenu";
 
-export default function TaskTable({ search, pagination }){
+export default function TaskTable({ search, pagination, filteredTasks }){
 
     const {
         currentTask,
@@ -83,7 +83,7 @@ export default function TaskTable({ search, pagination }){
     }
   
       // task list
-      const data = tasks
+      const data = filteredTasks
       .filter( task => 
         task.task_name?.toString().toLowerCase().includes(search.toString().toLowerCase()) ||
         task.User?.user_name?.toString().toLowerCase().includes(search.toString().toLowerCase())
