@@ -15,7 +15,9 @@ const EditSubTask = ({open, setOpen}) => {
         getTasks,
         currentSubtask,
         setCurrentSubtask,
-        getCurrentTask
+        getCurrentTask,
+        load,
+        unload
     } = useCustomContext()
 
     const showModal = () => {
@@ -30,6 +32,7 @@ const EditSubTask = ({open, setOpen}) => {
         }
     
         else{
+            load()
             await axios.put(`/subtask/update/${currentSubtask.subtask_id}`, { ...currentSubtask })
             .then( async response => {
                 await getCurrentTask(currentTask.task_id)
@@ -41,6 +44,7 @@ const EditSubTask = ({open, setOpen}) => {
                 setOpen(true)
                 message.error( error.response.data.message )
             })
+            .finally( _=> unload())
         }
       }
 

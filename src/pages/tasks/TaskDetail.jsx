@@ -8,7 +8,9 @@ export default function TaskDetail(){
 
     const {
         currentTask,
-        getCurrentTask
+        getCurrentTask,
+        load,
+        unload
     } = useCustomContext()
 
     const isEverySubtaskFinished = currentTask.SubTasks?.every( subtask => subtask.subtask_status.toString().toLowerCase() == 'finished' )
@@ -22,6 +24,9 @@ export default function TaskDetail(){
         if(e.target.checked){
 
             if( isTaskEmpty || isEverySubtaskFinished ){
+
+                load()
+
                 await axios.put(`/task/update/${currentTask.task_id}`, { task_status: 'finished', task_finished_at: new Date() })
                 .then( response => {
                     message.success('Tâche modifiée avec succès!')
@@ -29,6 +34,7 @@ export default function TaskDetail(){
                 .catch( error =>  {
                     console.log(error);
                 })
+                .finally( _=> unload() )
             }
             else{
                 message.error( 'Toutes les sous-tâche ne sont pas encore accomplies!' )
@@ -36,6 +42,9 @@ export default function TaskDetail(){
         }
         else{
             // if( isTaskEmpty ){
+
+                load()
+
                 await axios.put(`/task/update/${currentTask.task_id}`, { task_status: 'approved', task_finished_at: null })
                 .then( response => {
                     message.success('Tâche modifiée avec succès!')
@@ -43,6 +52,7 @@ export default function TaskDetail(){
                 .catch( error =>  {
                     console.log(error);
                 })
+                .finally( _=> unload() )
             // }
         }
         getCurrentTask(currentTask.task_id)

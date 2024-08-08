@@ -19,6 +19,11 @@ export default function UpdateTask (){
 
     const { currentTask, setCurrentTask } = useCustomContext()
 
+    const {
+        load,
+        unload
+    } = useCustomContext()
+
     const navigate = useNavigate()
 
     const handleSubmit = async _=> {
@@ -27,6 +32,9 @@ export default function UpdateTask (){
             message.warning('Veuillez saisir le nom de la tâche!')
         }
         else{
+
+            load()
+
             await axios.put(`/task/update/${currentTask.task_id}`, { ...currentTask })
             .then( response => {
                 message.success('Tâche modifiée avec succès!')
@@ -37,6 +45,7 @@ export default function UpdateTask (){
                 console.log(error.response.data.data);
                 
             })
+            .finally( _=> unload() )
         }
     }
 

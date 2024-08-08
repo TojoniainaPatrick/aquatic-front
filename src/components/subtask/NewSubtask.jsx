@@ -15,7 +15,9 @@ const NewSubtask = () => {
     const {
         currentTask,
         getTasks,
-        getCurrentTask
+        getCurrentTask,
+        load,
+        unload
     } = useCustomContext()
 
     const showModal = () => {
@@ -30,17 +32,19 @@ const NewSubtask = () => {
         }
     
         else{
-          await axios.post('/subtask/create', { ...subtask, task_id: currentTask.task_id })
-          .then( response => {
-            getCurrentTask(currentTask.task_id)
-            message.success(response.data.message)
-            setOpen(false)
-            setSubtask({})
-          })
-          .catch( error =>  {
-            setOpen(true)
-            message.error( error.response.data.message )
-          })
+            load()
+            await axios.post('/subtask/create', { ...subtask, task_id: currentTask.task_id })
+            .then( response => {
+                getCurrentTask(currentTask.task_id)
+                message.success(response.data.message)
+                setOpen(false)
+                setSubtask({})
+            })
+            .catch( error =>  {
+                setOpen(true)
+                message.error( error.response.data.message )
+            })
+            .finally( _=> unload())
         }
       }
 

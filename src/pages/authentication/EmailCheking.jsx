@@ -4,11 +4,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button, message } from 'antd'
 import TextInput from "../../components/textinput/TextInput"
 import axios from "../../api/axios"
+import useCustomContext from "../../context/useCustomContext"
 
 
 export default function EmailCheking(){
 
     const [ messageApi, contextHolder ] = message.useMessage();
+
+    const {
+        load,
+        unload
+    } = useCustomContext()
 
     const success = ( message ) => {
         messageApi.open({
@@ -39,6 +45,7 @@ export default function EmailCheking(){
             warning('Veuillez saisir votre adresse mail!')
         }
         else{
+            load()
             await axios.post('/restorepass/email/checking', { user_email })
             .then( response => {
                 localStorage.setItem('user', JSON.stringify( response.data.data ))
@@ -49,6 +56,7 @@ export default function EmailCheking(){
                 if( errordata.response.data.message ) error(( errordata.response.data.message ))
                 else error( errordata.message )
             })
+            .finally( _=> unload() )
         }
     }
 

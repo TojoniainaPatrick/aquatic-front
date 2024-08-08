@@ -9,21 +9,29 @@ export const CustomContextProvider = ({ children }) => {
     // logged user
     const user = JSON.parse(localStorage.getItem('user')) || {}
 
+    const [ loading, setLoading ] = useState( false )
+    const load = () => setLoading(true)
+    const unload = () => setLoading(false)
+
     // tasks
     const [ tasks, setTasks ] = useState([])
     const [ currentTask, setCurrentTask ] = useState({})
     const [ unfinishedTask, setUnfinishedTask ] = useState([])
 
     const getTasks = async() => {
+        load()
         await axios('/task/list')
         .then( response => setTasks( response.data.data ))
         .catch( error => { console.log(error) })
+        .finally ( _=> unload())
     }
     
     const getCurrentTask = async(task_id) => {
+        load()
         await axios(`/task/byId/${task_id}`)
         .then( response => setCurrentTask( response.data.data ))
         .catch( error => { console.log(error) })
+        .finally ( _=> unload())
     }
 
     // subtasks
@@ -34,12 +42,14 @@ export const CustomContextProvider = ({ children }) => {
     const [ currentUser, setCurrentUser ] = useState({})
 
     const getUsers = async () => {
+        load()
         await axios('/user/list')
         .then( response =>  setUsers( response.data.data ))
         .catch( error => {
             if( error.response.data.message ) message.error( error.response.data.message )
             else message.error( error.message )
         })
+        .finally ( _=> unload())
     }
 
     // user logged in
@@ -50,12 +60,14 @@ export const CustomContextProvider = ({ children }) => {
 
     // get all notifications
     const getNotifications = async () => {
+        load()
         await axios('/notification/list')
         .then( response =>  setNotifications( response.data.data ))
         .catch( error => {
             if( error.response.data.message ) message.error( error.response.data.message )
             else message.error( error.message )
         })
+        .finally ( _=> unload())
     }
 
     // current user notification
@@ -68,16 +80,23 @@ export const CustomContextProvider = ({ children }) => {
 
     // check tasks
     const checkTasks = async () => {
+        load()
         await axios('/task/check')
         .then( response =>  setUnfinishedTask( response.data.data ))
         .catch( error => {
             if( error.response.data.message ) message.error( error.response.data.message )
             else message.error( error.message )
         })
+        .finally ( _=> unload())
     }
 
     return(
         <CustomContext.Provider value = {{
+
+            // loadin
+            loading,
+            load,
+            unload,
 
             // task
             tasks,

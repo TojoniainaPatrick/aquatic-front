@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, Spinner } from '@chakra-ui/react'
 import { CustomContextProvider } from './context/CustomContext.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/authentication/LoginPage.jsx'
@@ -27,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ChakraProvider>
       <BrowserRouter>
         <CustomContextProvider>
+
           <Routes>
 
             <Route index element = { <LoginPage />} />

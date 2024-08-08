@@ -12,10 +12,13 @@ export default function LoginPage(){
 
     const [ messageApi, contextHolder ] = message.useMessage();
 
+
     const {
         setLoggedUser,
         checkTasks,
-        getNotifications
+        getNotifications,
+        load,
+        unload
     } = useCustomContext()
 
     useEffect( () => {
@@ -58,6 +61,7 @@ export default function LoginPage(){
             warning('Veuillez saisir votre mot de passe!')
         }
         else{
+            load()
             await axios.post('/user/authenticate', { user_email, user_password })
             .then( response => {
                 if(response.data?.data?.user_account_status?.toString().toLowerCase() == 'waiting') warning('Votre compte est en attente de validation! Veuillez patienter!')
@@ -75,6 +79,7 @@ export default function LoginPage(){
             .catch( errordata => {
                 error( errordata?.response?.data?.message )
             })
+            .finally( _=> unload())
         }
     }
 

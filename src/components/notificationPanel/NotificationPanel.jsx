@@ -3,11 +3,14 @@ import { Card, CardBody, CardFooter, CardHeader, Drawer, DrawerBody, DrawerClose
 import React, { useEffect } from "react"
 import useCustomContext from '../../context/useCustomContext'
 import { Space } from "antd"
+import axios from "../../api/axios"
+import { useNavigate } from 'react-router-dom'
 
 function NotificationPanel() {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
+    const navigate = useNavigate()
 
     const {
       getNotifications,
@@ -17,6 +20,19 @@ function NotificationPanel() {
     useEffect( () => {
       getNotifications()
     }, [])
+
+    const handleClick = async notification => {
+      await axios.put(`/notification/update/${notification.notification_id}`)
+      .then( _=> {
+        if(notification.notification_object?.toString().toLowerCase().includes('compte')) navigate('/aqs/user')
+        else navigate('/aqs/task')
+        onClose()
+        getNotifications()
+      })
+      .catch( error => {
+        console.log(error);
+      })
+    }
   
     return (
       <>
@@ -40,7 +56,7 @@ function NotificationPanel() {
 
               {
                 currentUserNotifications.map( ( notification, key ) =>
-                  <Card key = { key } style={{ marginBottom: 5}} size = 'sm'>
+                  <Card hover key = { key } style={{ marginBottom: 5, cursor: 'pointer', background: notification.notification_status == 'new' ? '#F2F2F2' : 'white'}} size = 'sm' onClick = { ()=> handleClick(notification) }>
 
                     <CardHeader style={{fontWeight: 'bold', color: 'GrayText'}}> { notification.notification_object || '' } </CardHeader>
                     <CardBody> { notification.notification_content || '' } </CardBody>

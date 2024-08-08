@@ -13,7 +13,9 @@ export default function Profile(){
 
   const {
     loggedUser,
-    setLoggedUser
+    setLoggedUser,
+    load,
+    unload
   } = useCustomContext()
 
   const imageHandler = (e) => {
@@ -30,6 +32,9 @@ export default function Profile(){
   }
 
   const uploadImage = (image) => {
+
+    load()
+
     let formData = new FormData();
 
     formData.append("image", image);
@@ -42,7 +47,8 @@ export default function Profile(){
     .then(resBody => {
         setLoggedUser({ ...loggedUser, user_image_url: resBody.user_image_url})
         localStorage.setItem('user', JSON.stringify({ ...user, user_image_url: resBody.user_image_url}))
-    });
+    })
+    .finally( _=> unload() )
 
   }
   
@@ -51,6 +57,9 @@ export default function Profile(){
   const navigate = useNavigate()
 
   const handleUpdate = async _=> {
+
+    load()
+
     await axios.put(`/user/update/${update.user_id}`, update)
     .then( response => {
         setLoggedUser(response.data.data)
@@ -62,6 +71,7 @@ export default function Profile(){
       if(error.response.data.message) message.error(error.response.data.message)
       else message.error(error.message)
     })
+    .finally( _=> unload() )
   }
 
     return(

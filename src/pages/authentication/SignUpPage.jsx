@@ -6,6 +6,7 @@ import PasswordInput from '../../components/passwordInput/PasswordInput'
 import TextInput from '../../components/textinput/TextInput'
 import CustomSelect from '../../components/select/CustomSelect'
 import axios from '../../api/axios'
+import useCustomContext from '../../context/useCustomContext'
 
 const roles = [
     {
@@ -24,6 +25,11 @@ export default function SignUpPage(){
     const [ messageApi, contextHolder ] = message.useMessage();
 
     const navigate = useNavigate();
+
+    const {
+        load,
+        unload
+    } = useCustomContext()
 
     const success = ( message ) => {
         messageApi.open({
@@ -65,6 +71,9 @@ export default function SignUpPage(){
             warning('Veuillez choisir le type de votre compte!')
         }
         else{
+
+            load()
+
             await axios.post('/email/checking', { user_email })
             .then( response => {
 
@@ -87,6 +96,7 @@ export default function SignUpPage(){
                 if( errordata.response.data.message ) error(( errordata.response.data.message ))
                 else error( errordata.message )
             })
+            .finally( _=> unload() )
         }
     }
 

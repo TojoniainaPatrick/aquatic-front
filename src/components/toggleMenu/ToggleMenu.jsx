@@ -50,7 +50,7 @@ function ToggleMenu() {
                     </li>
                     {
                       user.user_role?.toString().toLowerCase() == 'approving' &&
-                        <li className = 'nav-item'>
+                        <li className = 'toggle-menu-item'>
                             <NavLink to = "/aqs/user" > <i></i> <span> Utilisateur </span> </NavLink>
                         </li>
                     }

@@ -10,7 +10,9 @@ const SubtaskList = ({ subtasks }) => {
     const {
         setCurrentSubtask,
         getCurrentTask,
-        currentTask
+        currentTask,
+        load,
+        unload
     } = useCustomContext()
 
     const confirm = async subtask_id => {
@@ -33,6 +35,8 @@ const SubtaskList = ({ subtasks }) => {
 
     const handleCheck = async ( e, subtask_id ) => {
 
+        load()
+
         try
         {
             if( e.target.checked ){
@@ -52,6 +56,7 @@ const SubtaskList = ({ subtasks }) => {
             else message.error( error.message )
         }
         
+        unload()
     }
 
     return(

@@ -3,13 +3,18 @@ import aqslogo from '../../assets/images/aqslogo.jpeg'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, message } from 'antd'
 import PasswordInput from "../../components/passwordInput/PasswordInput"
-import TextInput from "../../components/textinput/TextInput"
 import axios from "../../api/axios"
+import useCustomContext from "../../context/useCustomContext"
 
 
 export default function NewPassword(){
 
     const [ messageApi, contextHolder ] = message.useMessage();
+
+    const {
+        load,
+        unload
+    } = useCustomContext()
 
     const success = ( message ) => {
         messageApi.open({
@@ -43,6 +48,7 @@ export default function NewPassword(){
             warning('Veuillez verifier les mots de passe!')
         }
         else{
+            load()
             await axios.put(`/user/update/${ user.user_id }`, { user_password })
             .then( response => {
                 if(response.data?.data?.user_account_status?.toString().toLowerCase() == 'waiting'){
@@ -66,6 +72,7 @@ export default function NewPassword(){
                 if( errorData.response.data.message ) error(( errorData.response.data.message ))
                 else error( errorData.message )
             })
+            .finally( _=> unload())
         }
     }
 

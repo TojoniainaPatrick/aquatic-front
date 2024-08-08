@@ -4,11 +4,18 @@ import { message } from 'antd'
 import { Flex, Input, Typography } from 'antd';
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import useCustomContext from "../../context/useCustomContext";
 const { Title } = Typography;
 
 export default function OtpChecking(){
 
     const [ messageApi, contextHolder ] = message.useMessage();
+
+    const {
+        load,
+        unload
+    } = useCustomContext()
+
     const navigate = useNavigate()
 
     const success = ( message ) => {
@@ -35,6 +42,9 @@ export default function OtpChecking(){
     const register_user = JSON.parse(localStorage.getItem('user')) || {}
 
     const handleCheck = async value => {
+
+        load()
+
         if(localStorage.getItem('action') == 'registration'){
             if( value == register_user.user_otp ){
                 await axios.post('/user/create', register_user)
@@ -50,6 +60,8 @@ export default function OtpChecking(){
             else( error('Code incorrect!') )
         }
         else navigate('/newpassword')
+
+        unload()
     }
 
     return(

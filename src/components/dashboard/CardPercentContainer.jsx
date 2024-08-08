@@ -6,17 +6,17 @@ export default function CardPercentContainer({ finishedOnTime, finishedOutTime, 
 
             <Card style = {{ minWidth: '30vw' }}>
                 <span style = {{ fontWeight: 'bold', color: 'gray', paddingBottom: 8 }}>Accomplie dans le délais</span>
-                <Progress percent = { finishedOnTime } strokeLinecap = "butt" strokeColor="#35df81"/>
+                <Progress percent = { finishedOnTime } strokeLinecap = "square" status="active" strokeColor="#35df81"/>
             </Card>
 
             <Card style = {{ minWidth: '30vw' }}>
                 <span style = {{ fontWeight: 'bold', color: 'gray', paddingBottom: 8 }}>Accomplie hors du délais</span>
-                <Progress percent = { finishedOutTime } strokeLinecap = "butt" strokeColor="#f1bd38" />
+                <Progress percent = { finishedOutTime } strokeLinecap = "square" status="active" strokeColor="#f1bd38" />
             </Card>
 
             <Card style = {{ minWidth: '30vw' }}>
                 <span style = {{ fontWeight: 'bold', color: '#f73b73', paddingBottom: 8 }}>Non accomplie</span>
-                <Progress percent = { unFinished } strokeLinecap = "butt" strokeColor="#f73b73"/>
+                <Progress percent = { unFinished } strokeLinecap = "square" status="active" strokeColor="#f73b73"/>
             </Card>
         </Flex>
     )

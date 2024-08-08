@@ -13,6 +13,7 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 import axios from '../../api/axios'
 import { useNavigate } from 'react-router-dom'
+import useCustomContext from '../../context/useCustomContext'
 
 export default function NewTask (){
 
@@ -21,6 +22,11 @@ export default function NewTask (){
 
   const user = JSON.parse(localStorage.getItem('user'))
 
+  const {
+    load,
+    unload
+  } = useCustomContext()
+
   const handleSubmit = async _=> {
 
     if( !task.task_name ){
@@ -28,6 +34,9 @@ export default function NewTask (){
     }
 
     else{
+
+      load()
+
       await axios.post('/task/create', { ...task, task_created_by: user.user_id })
       .then( response => {
         message.success('Tâche inserée avec succès!')
@@ -35,7 +44,8 @@ export default function NewTask (){
       })
       .catch( error =>  {
         message.error( error.response.data.message )
-      })      
+      })
+      .finally( _=> unload())      
     }
   }
 

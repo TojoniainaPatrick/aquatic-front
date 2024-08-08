@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import ProgressComponents from "../../components/ant-design/ProgressComponents";
 import useCustomContext from '../../context/useCustomContext'
 import dayjs from 'dayjs'
-import { Card, Divider, Flex } from "antd";
+import { Divider } from "antd";
 import { CheckCircleFilled, FileDoneOutlined, MinusCircleFilled, WarningFilled } from "@ant-design/icons";
 import CardContainer from "../../components/dashboard/CardContainer";
 import CardPercentContainer from "../../components/dashboard/CardPercentContainer";
@@ -65,9 +64,9 @@ export default function Dashboard() {
         }
     ]
 
-    const unfinishedTask_percent = ((Number(unfinishedTask) * 100) / tasksCount).toFixed(1)
-    const finishedOnTime_percent = ((Number(finishedOnTime) * 100) / tasksCount).toFixed(1)
-    const finishedOutTime_percent = ((Number(finishedOutTime) * 100) / tasksCount).toFixed(1)
+    const unfinishedTask_percent = Number((Number(unfinishedTask) * 100) / Number(tasksCount))
+    const finishedOnTime_percent = Number((Number(finishedOnTime) * 100) / Number(tasksCount))
+    const finishedOutTime_percent = Number((Number(finishedOutTime) * 100) / Number(tasksCount))
 
     
     useEffect(() => {

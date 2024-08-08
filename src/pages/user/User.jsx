@@ -13,7 +13,9 @@ export default function User(){
         users,
         getUsers,
         setCurrentUser,
-        currentUser
+        currentUser,
+        load,
+        unload
     } = useCustomContext()
 
     const [ pagination, setPagination ] = useState(10)
@@ -56,6 +58,9 @@ export default function User(){
     ]
 
     const handleDelete = async () => {
+
+        load()
+
         await axios.delete(`/user/delete/${currentUser.user_id}`)
         .then( async _=> {
             await getUsers()
@@ -65,9 +70,13 @@ export default function User(){
             if(errordata.response.data.message) message.error(errordata.response.data.message)
             else message.error(errordata.message)
         })
+        .finally( _=> unload() )
     }
 
     const handleApprove = async () => {
+
+        load()
+
         await axios.put(`/user/update/${currentUser.user_id}`, { user_account_status: 'enabled' })
         .then( async _=> {
             await getUsers()
@@ -77,9 +86,13 @@ export default function User(){
             if(errordata.response.data.message) message.error(errordata.response.data.message)
             else message.error(errordata.message)
         })
+        .finally( _=> unload() )
     }
 
     const handleReject = async () => {
+
+        load()
+
         await axios.put(`/user/update/${currentUser.user_id}`, { user_account_status: 'rejected' })
         .then( async _=> {
             await getUsers()
@@ -89,9 +102,13 @@ export default function User(){
             if(errordata.response.data.message) message.error(errordata.response.data.message)
             else message.error(errordata.message)
         })
+        .finally( _=> unload() )
     }
 
     const handleEnable = async () => {
+
+        load()
+
         await axios.put(`/user/update/${currentUser.user_id}`, { user_account_status: 'enabled' })
         .then( async _=> {
             await getUsers()
@@ -101,9 +118,13 @@ export default function User(){
             if(errordata.response.data.message) message.error(errordata.response.data.message)
             else message.error(errordata.message)
         })
+        .finally( _=> unload() )
     }
 
     const handleDesable = async () => {
+
+        load()
+
         await axios.put(`/user/update/${currentUser.user_id}`, { user_account_status: 'desabled' })
         .then( async _=> {
             await getUsers()
@@ -113,6 +134,7 @@ export default function User(){
             if(errordata.response.data.message) message.error(errordata.response.data.message)
             else message.error(errordata.message)
         })
+        .finally( _=> unload() )
     }
 
     // list of actions on user

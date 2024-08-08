@@ -11,3 +11,24 @@
 .page-content{
     margin-top: 100px;
 }
+
+.ant-spin.ant-spin-spinning.css-dev-only-do-not-override-1pg9a38.load {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, .8);
+    z-index: 10;
+    opacity: 1;
+    transition: all ease-in-out .2s;
+}
+
+.ant-spin.ant-spin-spinning.css-dev-only-do-not-override-1pg9a38.unload {
+    opacity: 0;
+    z-index: -10;
+    transition: all ease-in-out .2s;
+}
