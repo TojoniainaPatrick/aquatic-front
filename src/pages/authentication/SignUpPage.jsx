@@ -137,6 +137,7 @@ export default function SignUpPage(){
                         data = { roles }
                         placeholder = 'Type de compte'
                         setValue = { setUser_role }
+                        value = { user_role }
                     />
 
                     <div className="btn-container">

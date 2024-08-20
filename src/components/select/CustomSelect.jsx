@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select } from 'antd';
 
-const CustomSelect = ({ data, placeholder, setValue }) => (
+const CustomSelect = ({ data, placeholder, setValue, value }) => (
     <Select
     
         showSearch
@@ -11,6 +11,8 @@ const CustomSelect = ({ data, placeholder, setValue }) => (
         style={{ width: '100%', marginTop: '15px' }}
 
         placeholder = { placeholder }
+
+        value = { value || null }
 
         optionFilterProp="label"
 

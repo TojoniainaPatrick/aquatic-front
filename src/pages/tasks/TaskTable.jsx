@@ -13,7 +13,6 @@ export default function TaskTable({ search, pagination, filteredTasks }){
     const {
         currentTask,
         getTasks,
-        tasks,
         setCurrentTask
     } = useCustomContext()
 
@@ -24,6 +23,7 @@ export default function TaskTable({ search, pagination, filteredTasks }){
     // list of a task actions
     const popup_menu_items = taskItem => {
       return [
+        ( user_role == 'approving' || user_id == taskItem.task_created_by ) && 
         {
           label: <Link to = {`/aqs/task/detail/${ currentTask.task_id }`}><Button type = 'default'> Détails </Button></Link>,
           key: '1',
@@ -113,7 +113,7 @@ export default function TaskTable({ search, pagination, filteredTasks }){
             columns = { columns }
             data = { data }
             pagination = { pagination }
-            height = { 500 }
+            height = 'calc(100vh - 380px)'
         />
     )
 }

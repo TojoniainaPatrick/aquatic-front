@@ -9,7 +9,10 @@
 }
 
 .page-content{
-    margin-top: 100px;
+    margin-top: 80px;
+    padding-top: 20px;
+    background: #F2F2F2;
+    min-height: calc( 100vh - 80px );
 }
 
 .ant-spin.ant-spin-spinning.css-dev-only-do-not-override-1pg9a38 {

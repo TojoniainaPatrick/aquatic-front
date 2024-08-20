@@ -101,7 +101,7 @@ export default function NewPassword(){
                     />
 
                     <div className="btn-container">
-                        <Button type="primary" block size = 'large' onClick = { handleSubmit }> Se connecter </Button>
+                        <Button type="primary" block size = 'large' onClick = { handleSubmit }> Continuer </Button>
                     </div>
 
                     <div className="link-container">

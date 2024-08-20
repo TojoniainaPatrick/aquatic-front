@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { PlusSquareOutlined } from '@ant-design/icons';
-import { Button, DatePicker, Flex, Form, Input, message, Modal, Select, Space } from 'antd';
+import React from 'react';
+import {  DatePicker, Form, Input, message, Modal, Space } from 'antd';
 import dayjs from 'dayjs'
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
@@ -12,7 +11,6 @@ const EditSubTask = ({open, setOpen}) => {
 
     const {
         currentTask,
-        getTasks,
         currentSubtask,
         setCurrentSubtask,
         getCurrentTask,

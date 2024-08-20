@@ -54,7 +54,7 @@ export default function NewTask (){
   return (
       <Form
         layout="vertical"
-        style = {{ maxWidth: '300px', margin: 'auto', padding: '20px', border: '1px solid lightgray', borderRadius: '10px' }}
+        style = {{ maxWidth: '300px', margin: 'auto', padding: '20px', border: '1px solid lightgray', borderRadius: '10px', background: 'white' }}
       >
 
         <Form.Item label="Nom de la tâche" required>

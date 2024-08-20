@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "../../api/axios";
 import useCustomContext from "../../context/useCustomContext";
-import { Button, Checkbox, Flex, Form, Input, message, Popconfirm, Radio, Select, Space, Switch } from "antd";
+import { Button, Flex, Form, Input, message, Popconfirm, Space, Switch } from "antd";
 import { EditOutlined, LockFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -75,7 +75,7 @@ export default function Profile(){
   }
 
     return(
-      <Flex style={{ background: 'white'}} vertical = { true } align = "center" justify = "space-between">
+      <Flex style={{ background: '#F2F2F2'}} vertical = { true } align = "center" justify = "space-between">
 
         <Flex flex={1}>
           <div className="photo-container">
